@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/28 19:48:52 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/10 21:25:51 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/10 21:56:06 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int		ft_printf(const char *format, ...)
 	va_start(ap, format);
 	while (rnw(&format, &pcount))
 	{
-		//printf("spam\n");
-		sleep(1);
 		tmp = bspecial((char **)&format, &ap);
 		pcount = pcount + tmp;
 		while (!ft_included(*format, "cspdiuxX"))
@@ -88,6 +86,7 @@ int		wwcd(char **format, va_list *ap, char c)
 
 int		main(void)
 {
-	ft_printf("text%-0*.*p\n", 5, 3, 42);
+	ft_printf("text%*.*X\n", 42, 33, 429967295);
+	printf("text%*.*X\n", 42, 33, 429967295);
 	return (0);
 }

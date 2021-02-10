@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/25 11:36:39 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/09 13:02:15 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/10 21:53:53 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		ft_prepdi(va_list *ap, char **format)
 	n.width = ft_width(*format + 1, ap);
 	n.precision = ft_precision(*format, ap);
 	n.nbr = va_arg(*ap, int);
+	n.usi = (unsigned int)n.nbr;
 	n.min = 0;
 	n.zero = 32;
 	n.right = 0;
@@ -84,7 +85,7 @@ int		ft_putdi(t_prep info)
 			ft_putchar('-');
 		ft_putnbr_b(info.nbr, "0123456789", 10);
 		if (info.right)
-			ft_putwidth(info.width - info.len, ' ');
+			ft_putwidth(info.width - info.superiorlen, ' ');
 		return (ft_retour(info.superiorlen, info.width));
 	}
 	return(ft_putpositive(info, "0123456789"));
@@ -97,13 +98,14 @@ int		ft_putpositive(t_prep info, char *base)
 		if (!info.right)
 			ft_putwidth(info.width - info.superiorlen, ' ');
 		ft_putwidth(info.precision - info.len, '0');
+		//printf("\nw %i\np %d\ns %i\nl %d\n", info.width, info.precision, info.superiorlen, info.len);
 	}
 	else
 		if (!info.right)
 			ft_putwidth(info.width - info.len, info.zero);
-	ft_putnbr_b(info.nbr, base, ft_strlen(base));
+	ft_putnbr_b(info.usi, base, ft_strlen(base));
 	if (info.right)
-		ft_putwidth(info.width - info.len, ' ');
+		ft_putwidth(info.width - info.superiorlen, ' ');
 	return (ft_retour(info.superiorlen, info.width));
 }
 
@@ -113,10 +115,10 @@ int		ft_uprep(va_list *ap, char **format, char *base)
 
 	n.width = ft_width(*format + 1, ap);
 	n.precision = ft_precision(*format, ap);
-	n.nbr = va_arg(*ap, unsigned int); //here is where problems may lie...
+	n.usi = va_arg(*ap, unsigned int); //here is where problems may lie...
 	n.zero = 32;
 	n.right = 0;
-	n.len = ft_writelen_b(n.nbr, 10);
+	n.len = ft_writelen_b(n.usi, ft_strlen(base));
 	n.superiorlen = n.len;
 	if (n.precision > n.len)
 		n.superiorlen = n.precision;
