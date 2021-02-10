@@ -6,9 +6,11 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/30 19:38:45 by oswin         #+#    #+#                 */
-/*   Updated: 2021/01/30 23:12:48 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/09 12:28:32 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "printf.h"
 
 int		ft_atoi(char *nbr)
 {
@@ -23,15 +25,6 @@ int		ft_atoi(char *nbr)
 		i++;
 	}
 	return (n);
-}
-
-void	ft_putwidth(int width, int c)
-{
-	while (width > 0)
-	{
-		ft_putchar(c);
-		width--;
-	}
 }
 
 int		ft_width(char *format, va_list *ap)
@@ -54,4 +47,13 @@ int		ft_precision(char *format, va_list *ap)
 	if (*format == '.')
 		return (ft_atoi(format + 1));
 	return (-1);
+}
+
+void	ft_putwidth(int width, int c)
+{
+	while (width > 0)
+	{
+		ft_putchar(c);
+		width--;
+	}
 }

@@ -6,17 +6,19 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/29 15:01:50 by oswin         #+#    #+#                 */
-/*   Updated: 2021/01/30 23:12:44 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/09 12:57:02 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		putc(va_list *ap, char **format)
+#include "printf.h"
+
+int		ft_putc(va_list *ap, char **format)
 {
 	int		width;
-	char	c;
+	int	c;
 
 	width = ft_width(*format + 1, ap);
-	c = va_arg(*ap, char);
+	c = va_arg(*ap, int);
 	if (width)
 		width--;
 	if (*format[1] == '-')
@@ -40,7 +42,7 @@ int		ft_puts(va_list *ap, char **format)
 	char	*s;
 
 	width = ft_width(*format + 1, ap);
-	len = ft_precision(format, ap);
+	len = ft_precision(*format, ap);
 	s = va_arg(*ap, char *);
 	s_len = ft_strlen(s);
 	if (len < s_len && len != -1)

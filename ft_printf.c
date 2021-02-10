@@ -6,11 +6,14 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/28 19:48:52 by oswin         #+#    #+#                 */
-/*   Updated: 2021/01/29 22:51:36 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/09 22:13:59 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include <stdarg.h>
+#include <stddef.h>
+#include "printf.h"
 
 int		ft_printf(const char *format, ...)
 {
@@ -22,7 +25,8 @@ int		ft_printf(const char *format, ...)
 	va_start(ap, format);
 	while (rnw(&format, &pcount))
 	{
-		tmp = bspecial(&format, &ap);
+		tmp = bspecial((char **)&format, &ap);
+		pcount = pcount + tmp;
 	}
 }
 
@@ -31,7 +35,7 @@ int		rnw(const char **format, int *pcount)
 	int		i;
 
 	i = 0;
-	while (*format[i] && *format[i] != '%')
+	while ((*format)[i] && (*format)[i] != '%')
 		i++;
 	if (i)
 	{
@@ -65,13 +69,19 @@ int		wwcd(char **format, va_list *ap, char c)
 	if (c == 's')
 		return (ft_puts(ap, format));
 	if (c == 'p')
-		return (ft_putp(ap, format));
+		return (ft_prep_ptr(ap, format));
 	if (c == 'd' || c == 'i')
-		return (ft_putdi(ap, format)); 
+		return (ft_prepdi(ap, format)); 
 	if (c == 'u')
-		return (ft_putu(ap, format));
+		return (ft_uprep(ap, format, "0123456789"));
 	if (c == 'x')
-		return (ft_putx(ap, format));
+		return (ft_uprep(ap, format, "0123456789abcdef"));
 	if (c == 'X')
-		return (ft_putX(ap, format));
+		return (ft_uprep(ap, format, "0123456789ABCDEF"));
+}
+
+int		main(void)
+{
+	ft_printf("text%d\n", 1);
+	return (0);
 }

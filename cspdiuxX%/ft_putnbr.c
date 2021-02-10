@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/25 11:36:39 by oswin         #+#    #+#                 */
-/*   Updated: 2021/01/30 23:07:24 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/09 13:02:15 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,7 @@
 
 #include <stddef.h>
 #include <unistd.h>
-#include <stdio.h>
-
-void	ft_putchar(int c)
-{
-	write(1, &c, 1);
-}
+#include "printf.h"
 
 void	ft_putnbr_b(size_t input, char *base, int blen)
 {
@@ -35,22 +30,99 @@ void	ft_putnbr_b(size_t input, char *base, int blen)
 	}
 }
 
-
-
-
-
-int		main(void)
+int		ft_prepdi(va_list *ap, char **format)
 {
-	int q = -214483648;
-	ft_putnbr_b(-1 * (size_t)q, "0123456789", 10);
-	ft_putchar('\n');
-	ft_putnbr_b(21474836480808080, "0123456789abcdef", 10);
-	ft_putchar('\n');
-	printf("%x\n", 33);
-	printf("%01.3d\n", -30);
-	int i = 252645135;
-	int b = 986895;
-	printf("%7.0s\n", "string05");
-	printf("%000*.3c\n", 3, 'a');
-	return (0);
+	t_prep		n;
+
+	n.width = ft_width(*format + 1, ap);
+	n.precision = ft_precision(*format, ap);
+	n.nbr = va_arg(*ap, int);
+	n.min = 0;
+	n.zero = 32;
+	n.right = 0;
+	if (n.nbr < 0)
+	{
+		n.len = 1 + ft_writelen_b(n.nbr * -1, 10);
+		n.min = 1;
+		n.superiorlen = n.len;
+		if (n.precision + 1 > n.len)
+			n.superiorlen = n.precision + 1;
+	}
+	else
+	{
+		n.len = ft_writelen_b(n.nbr, 10);
+		n.superiorlen = n.len;
+		if (n.precision > n.len)
+			n.superiorlen = n.precision;
+	}
+	if ((*format)[1] == '0')
+		n.zero = 48;
+	if ((*format)[1] == '-')
+		n.right = 1;
+	return (ft_putdi(n));
+}
+
+int		ft_putdi(t_prep info)
+{
+	if (info.min)
+	{
+		if (info.precision > 0)
+		{
+			if (!info.right)
+				ft_putwidth(info.width - info.superiorlen, ' ');
+			ft_putchar('-');
+			ft_putwidth(info.precision - info.len + 1, '0');
+		}
+		else
+			if (!info.right)
+			{
+				if (info.zero == 48)
+					ft_putchar('-');
+				ft_putwidth(info.width - info.len, info.zero);
+			}
+		if (info.zero != 48)
+			ft_putchar('-');
+		ft_putnbr_b(info.nbr, "0123456789", 10);
+		if (info.right)
+			ft_putwidth(info.width - info.len, ' ');
+		return (ft_retour(info.superiorlen, info.width));
+	}
+	return(ft_putpositive(info, "0123456789"));
+}
+
+int		ft_putpositive(t_prep info, char *base)
+{
+	if (info.precision > 0)
+	{
+		if (!info.right)
+			ft_putwidth(info.width - info.superiorlen, ' ');
+		ft_putwidth(info.precision - info.len, '0');
+	}
+	else
+		if (!info.right)
+			ft_putwidth(info.width - info.len, info.zero);
+	ft_putnbr_b(info.nbr, base, ft_strlen(base));
+	if (info.right)
+		ft_putwidth(info.width - info.len, ' ');
+	return (ft_retour(info.superiorlen, info.width));
+}
+
+int		ft_uprep(va_list *ap, char **format, char *base)
+{
+	t_prep		n;
+
+	n.width = ft_width(*format + 1, ap);
+	n.precision = ft_precision(*format, ap);
+	n.nbr = va_arg(*ap, unsigned int); //here is where problems may lie...
+	n.zero = 32;
+	n.right = 0;
+	n.len = ft_writelen_b(n.nbr, 10);
+	n.superiorlen = n.len;
+	if (n.precision > n.len)
+		n.superiorlen = n.precision;
+	if ((*format)[1] == '0')
+		n.zero = 48;
+	if ((*format)[1] == '-')
+		n.right = 1;
+	return (ft_putpositive(n, base));
 }

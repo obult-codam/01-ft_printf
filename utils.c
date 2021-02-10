@@ -6,9 +6,11 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/29 12:24:15 by oswin         #+#    #+#                 */
-/*   Updated: 2021/01/30 19:39:48 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/09 12:25:20 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <unistd.h>
 
 int		ft_included(char to_check, char *str)
 {
@@ -44,4 +46,14 @@ int		ft_strlen(char *s)
 	while (s[i])
 		i++;
 	return (i);
+}
+
+void	ft_putstring(char *s)
+{
+	write(1, s, ft_strlen(s));
+}
+
+void	ft_putchar(int c)
+{
+	write(1, &c, 1);
 }
