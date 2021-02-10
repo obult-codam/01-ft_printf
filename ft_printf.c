@@ -6,13 +6,14 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/28 19:48:52 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/09 22:13:59 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/10 21:25:51 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdarg.h>
 #include <stddef.h>
+#include <stdio.h>
 #include "printf.h"
 
 int		ft_printf(const char *format, ...)
@@ -25,8 +26,13 @@ int		ft_printf(const char *format, ...)
 	va_start(ap, format);
 	while (rnw(&format, &pcount))
 	{
+		//printf("spam\n");
+		sleep(1);
 		tmp = bspecial((char **)&format, &ap);
 		pcount = pcount + tmp;
+		while (!ft_included(*format, "cspdiuxX"))
+			format++;
+		format++;
 	}
 }
 
@@ -50,14 +56,14 @@ int		bspecial(char **format, va_list *ap)
 {
 	int		i;
 
-	i = 0;
+	i = 1;
 	while (ft_included((*format)[i], "0123456789.*-"))
 		i++;
 	if (ft_included((*format)[i], "cspdiuxX"))
 		return (wwcd(format, ap, (*format)[i]));
 	else
 	{
-		ft_putchar('%');
+		//ft_putchar('%');
 		return (1);
 	}
 }
@@ -82,6 +88,6 @@ int		wwcd(char **format, va_list *ap, char c)
 
 int		main(void)
 {
-	ft_printf("text%d\n", 1);
+	ft_printf("text%-0*.*p\n", 5, 3, 42);
 	return (0);
 }
