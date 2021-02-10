@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/28 19:48:52 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/10 21:56:06 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/10 22:52:56 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ int		ft_printf(const char *format, ...)
 	{
 		tmp = bspecial((char **)&format, &ap);
 		pcount = pcount + tmp;
-		while (!ft_included(*format, "cspdiuxX"))
+		format++;
+		while (!ft_included(*format, "cspdiuxX%"))
 			format++;
 		format++;
 	}
+	return (pcount);
 }
 
 int		rnw(const char **format, int *pcount)
@@ -61,7 +63,7 @@ int		bspecial(char **format, va_list *ap)
 		return (wwcd(format, ap, (*format)[i]));
 	else
 	{
-		//ft_putchar('%');
+		ft_putchar('%');
 		return (1);
 	}
 }
@@ -86,7 +88,7 @@ int		wwcd(char **format, va_list *ap, char c)
 
 int		main(void)
 {
-	ft_printf("text%*.*X\n", 42, 33, 429967295);
-	printf("text%*.*X\n", 42, 33, 429967295);
+	printf("%i\n", ft_printf("eggs%*.*s  %c%%nope\n", 4, 3, "spam", 42));
+	printf("%i\n", printf("eggs%*.*s  %c%%nope\n", 4, 3, "spam", 42));
 	return (0);
 }

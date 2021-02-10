@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/25 11:36:39 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/10 21:53:53 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/10 22:25:19 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ int		ft_putdi(t_prep info)
 					ft_putchar('-');
 				ft_putwidth(info.width - info.len, info.zero);
 			}
-		if (info.zero != 48)
+		if (info.zero != 48 && !info.precision)
 			ft_putchar('-');
-		ft_putnbr_b(info.nbr, "0123456789", 10);
+		ft_putnbr_b((unsigned int)(-1 * info.nbr), "0123456789", 10);
 		if (info.right)
 			ft_putwidth(info.width - info.superiorlen, ' ');
 		return (ft_retour(info.superiorlen, info.width));
@@ -98,7 +98,6 @@ int		ft_putpositive(t_prep info, char *base)
 		if (!info.right)
 			ft_putwidth(info.width - info.superiorlen, ' ');
 		ft_putwidth(info.precision - info.len, '0');
-		//printf("\nw %i\np %d\ns %i\nl %d\n", info.width, info.precision, info.superiorlen, info.len);
 	}
 	else
 		if (!info.right)
@@ -115,7 +114,7 @@ int		ft_uprep(va_list *ap, char **format, char *base)
 
 	n.width = ft_width(*format + 1, ap);
 	n.precision = ft_precision(*format, ap);
-	n.usi = va_arg(*ap, unsigned int); //here is where problems may lie...
+	n.usi = va_arg(*ap, unsigned int);
 	n.zero = 32;
 	n.right = 0;
 	n.len = ft_writelen_b(n.usi, ft_strlen(base));
