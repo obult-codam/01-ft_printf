@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/30 19:38:45 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/11 21:57:25 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/11 22:19:31 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int		ft_precision(char *format, va_list *ap)
 		format++;
 	if (*format == '.' && format[1] == '*')
 		return (va_arg(*ap, unsigned int));
-	if (*format == '.' && !ft_included(*(format + 1), "0123456789"))		//more changes
-		return (-1);
-	return (ft_atoi(format + 1));
+	if (*format == '.')
+		return (ft_atoi(format + 1));
+	return (-1);
 }
 
 void	ft_putwidth(int width, int c)

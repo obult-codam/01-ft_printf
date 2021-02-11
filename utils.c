@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/29 12:24:15 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/11 21:07:41 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/11 22:10:17 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int		ft_writelen_b(size_t nbr, int blen)
 	int		i;
 
 	i = 0;
-	if (!nbr)
-		return (1);
+	// if (!nbr)
+	// 	return (1);
 	while (nbr)
 	{
 		nbr = nbr / blen;
