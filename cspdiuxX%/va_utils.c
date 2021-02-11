@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/30 19:38:45 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/09 12:28:32 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/11 17:34:58 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,15 @@ int		ft_precision(char *format, va_list *ap)
 
 void	ft_putwidth(int width, int c)
 {
+	int		d;
+
+	if (c == 48)
+		d = c;
+	else
+		d = 32;
 	while (width > 0)
 	{
-		ft_putchar(c);
+		ft_putchar(d);
 		width--;
 	}
 }

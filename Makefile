@@ -6,11 +6,11 @@
 #    By: obult <obult@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/04 16:49:28 by obult         #+#    #+#                  #
-#    Updated: 2021/02/11 10:40:02 by oswin         ########   odam.nl          #
+#    Updated: 2021/02/11 10:53:59 by oswin         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= printf.a
+NAME	= libftprintf.a
 
 SRCS	= ./ft_printf.c ./utils.c ./cspdiuxX%/ft_alpha.c \
 ./cspdiuxX%/ft_pointer.c ./cspdiuxX%/ft_putnbr.c ./cspdiuxX%/va_utils.c
