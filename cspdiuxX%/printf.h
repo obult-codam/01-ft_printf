@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/09 11:56:50 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/11 17:34:47 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/11 17:48:50 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		ft_precision(char *format, va_list *ap);
 void	ft_putwidth(int width, int c);
 
 int		ft_putc(va_list *ap, char **format, int mod);
-int		ft_puts(va_list *ap, char **format);
+int		ft_puts(va_list *ap, char **format, char *null);
 
 int		ft_prep_ptr(va_list *ap, char **format);
 int		ft_pointer(t_prep info, void *ptr);

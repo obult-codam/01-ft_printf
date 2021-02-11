@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/28 19:48:52 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/11 17:34:09 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/11 18:38:24 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		wwcd(char **format, va_list *ap, char c)
 	if (c == 'c')
 		return (ft_putc(ap, format, 0));
 	if (c == 's')
-		return (ft_puts(ap, format));
+		return (ft_puts(ap, format, "(null)"));
 	if (c == 'p')
 		return (ft_prep_ptr(ap, format));
 	if (c == 'd' || c == 'i')
@@ -86,6 +86,6 @@ int		wwcd(char **format, va_list *ap, char c)
 
 int		main(void)
 {
-	printf("%i\n", ft_printf("%05%\n"));
+	printf("%i\n", ft_printf("%i\n", -3));
 	return (0);
 }

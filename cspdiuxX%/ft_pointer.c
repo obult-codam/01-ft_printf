@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/27 21:41:30 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/10 21:33:49 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/11 18:00:23 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		ft_pointer(t_prep info, void *ptr)
 		if (!info.right)
 			ft_putwidth(info.width - info.superiorlen, ' ');
 		ft_putstring("0x");
-		ft_putwidth(info.precision - info.len, '0');
+		ft_putwidth(info.precision - info.len -2, '0');
 	}
 	else
 	{
@@ -50,7 +50,7 @@ int		ft_pointer(t_prep info, void *ptr)
 		{
 			if (info.zero == 48)
 				ft_putstring("0x");
-			ft_putwidth(info.width - info.len, info.zero);
+			ft_putwidth(info.width - info.len -2, info.zero);
 		}
 		if (info.zero != 48)
 			ft_putstring("0x");
