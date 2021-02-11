@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/28 19:48:52 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/10 22:52:56 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/11 10:41:21 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int		wwcd(char **format, va_list *ap, char c)
 		return (ft_uprep(ap, format, "0123456789abcdef"));
 	if (c == 'X')
 		return (ft_uprep(ap, format, "0123456789ABCDEF"));
+	return (0);
 }
 
 int		main(void)

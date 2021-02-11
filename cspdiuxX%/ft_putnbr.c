@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/25 11:36:39 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/10 22:25:19 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/11 10:45:54 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,22 @@
 #include <unistd.h>
 #include "printf.h"
 
+// void	ft_putnbr_b(size_t input, char *base, int blen)
+// {
+// 	if (input >= 0 && input < blen)
+// 		ft_putchar(base[input]);
+// 	else
+// 	{
+// 		ft_putnbr_b(input / blen, base, blen);
+// 		ft_putchar(base[input % blen]);
+// 	}
+// }
+
 void	ft_putnbr_b(size_t input, char *base, int blen)
 {
-	if (input >= 0 && input < blen)
-		ft_putchar(base[input]);
-	else
-	{
+	if (input > (unsigned int)blen)
 		ft_putnbr_b(input / blen, base, blen);
-		ft_putchar(base[input % blen]);
-	}
+	ft_putchar(base[input]);
 }
 
 int		ft_prepdi(va_list *ap, char **format)
