@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/25 11:36:39 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/11 20:31:07 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/11 20:52:17 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 void	ft_putnbr_b(size_t input, char *base, int blen)
 {
-	if (input > (unsigned int)blen)
+	if (input >= (unsigned int)blen)
 		ft_putnbr_b(input / blen, base, blen);
 	ft_putchar(base[input % blen]);
 }
