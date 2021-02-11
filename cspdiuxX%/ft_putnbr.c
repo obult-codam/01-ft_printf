@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/25 11:36:39 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/11 21:27:18 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/11 21:57:41 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int		ft_putpositive(t_prep info, char *base)
 	else
 		if (!info.right)
 			ft_putwidth(info.width - info.len, info.zero);
-	if (!info.usi && !info.precision)
+	if (info.usi && info.precision)
 		ft_putnbr_b(info.usi, base, ft_strlen(base));		//last change
 	if (info.right)
 		ft_putwidth(info.width - info.superiorlen, ' ');

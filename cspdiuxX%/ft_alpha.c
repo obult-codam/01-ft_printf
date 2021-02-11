@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/29 15:01:50 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/11 17:54:19 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/11 21:57:41 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ int		ft_puts(va_list *ap, char **format, char *null)
 	len = ft_strlen(s);
 	if (precision < len && precision != -1)
 		len = precision;
+	if (width < 0)
+	{
+		write(1, s, len);
+		ft_putwidth((-1 * width) - len, ' ');
+	}
 	if ((*format)[1] == '-')
 	{
 		write(1, s, len);
@@ -62,7 +67,5 @@ int		ft_puts(va_list *ap, char **format, char *null)
 		ft_putwidth(width - len, (*format)[1]);
 		write(1, s, len);
 	}
-	if (width > len)
-		return (width);
-	return (len);
+	return (ft_retour(width, len));
 }
