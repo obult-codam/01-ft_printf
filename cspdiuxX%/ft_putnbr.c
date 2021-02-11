@@ -6,29 +6,13 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/25 11:36:39 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/11 21:00:01 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/11 21:27:18 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-
-//no negatives! (size_t)
-//it can do all!!!
-//input sanitasion? what is that?
 
 #include <stddef.h>
 #include <unistd.h>
 #include "printf.h"
-
-// void	ft_putnbr_b(size_t input, char *base, int blen)
-// {
-// 	if (input >= 0 && input < blen)
-// 		ft_putchar(base[input]);
-// 	else
-// 	{
-// 		ft_putnbr_b(input / blen, base, blen);
-// 		ft_putchar(base[input % blen]);
-// 	}
-// }
 
 void	ft_putnbr_b(size_t input, char *base, int blen)
 {
@@ -109,7 +93,8 @@ int		ft_putpositive(t_prep info, char *base)
 	else
 		if (!info.right)
 			ft_putwidth(info.width - info.len, info.zero);
-	ft_putnbr_b(info.usi, base, ft_strlen(base));
+	if (!info.usi && !info.precision)
+		ft_putnbr_b(info.usi, base, ft_strlen(base));		//last change
 	if (info.right)
 		ft_putwidth(info.width - info.superiorlen, ' ');
 	return (ft_retour(info.superiorlen, info.width));

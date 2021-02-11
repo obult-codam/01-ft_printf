@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/30 19:38:45 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/11 17:34:58 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/11 21:21:54 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		ft_atoi(char *nbr)
 
 	n = 0;
 	i = 0;
+	if (nbr[0] == '-')
+		i++;
 	while (ft_included(nbr[i], "0123456789"))
 	{
 		n = n * 10 + nbr[i] - '0';
@@ -29,21 +31,35 @@ int		ft_atoi(char *nbr)
 
 int		ft_width(char *format, va_list *ap)
 {
+	int tmp;
+	
 	if (*format == '-')
 		format++;
 	while (*format == '0')
 		format++;
 	if (*format == '*')
-		return (va_arg(*ap, int));
+	{
+		tmp = va_arg(*ap, int);
+		if (tmp < 0)
+			tmp = tmp * -1;
+		return (tmp);
+	}
 	return (ft_atoi(format));
 }
 
 int		ft_precision(char *format, va_list *ap)
 {
+	int	tmp;
+
 	while (!ft_included(*format, ".cspdiux"))
 		format++;
 	if (*format == '.' && format[1] == '*')
-		return (va_arg(*ap, int));
+	{
+		tmp = va_arg(*ap, int);
+		if (tmp < 0)
+			tmp = tmp * -1;
+		return (tmp);
+	}
 	if (*format == '.')
 		return (ft_atoi(format + 1));
 	return (-1);
