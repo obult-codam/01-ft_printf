@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/25 11:36:39 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/11 22:18:27 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/12 10:19:33 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int		ft_prepdi(va_list *ap, char **format)
 {
 	t_prep		n;
 
-	n.width = ft_width(*format + 1, ap);
+	n.right = 0;
+	n.width = ft_width(*format + 1, ap, &(n.right));
 	n.precision = ft_precision(*format, ap);
 	n.nbr = va_arg(*ap, int);
 	n.usi = (unsigned int)n.nbr;
 	n.min = 0;
 	n.zero = 32;
-	n.right = 0;
 	if (n.nbr < 0)
 	{
 		n.len = 1 + ft_writelen_b(n.nbr * -1, 10);
@@ -51,6 +51,11 @@ int		ft_prepdi(va_list *ap, char **format)
 		n.zero = 48;
 	if ((*format)[1] == '-' || (*format)[2] == '-')
 		n.right = 1;
+	if (n.precision == 0 && n.usi == 0)
+	{
+		n.len = 0;
+		n.superiorlen = 0;
+	}
 	return (ft_putdi(n));
 }
 
@@ -104,11 +109,11 @@ int		ft_uprep(va_list *ap, char **format, char *base)
 {
 	t_prep		n;
 
-	n.width = ft_width(*format + 1, ap);
+	n.right = 0;
+	n.width = ft_width(*format + 1, ap, &(n.right));
 	n.precision = ft_precision(*format, ap);
 	n.usi = va_arg(*ap, unsigned int);
 	n.zero = 32;
-	n.right = 0;
 	n.len = ft_writelen_b(n.usi, ft_strlen(base));
 	n.superiorlen = n.len;
 	if (n.precision > n.len)
@@ -117,5 +122,10 @@ int		ft_uprep(va_list *ap, char **format, char *base)
 		n.zero = 48;
 	if ((*format)[1] == '-' || (*format)[2] == '-')
 		n.right = 1;
+	if (n.precision == 0 && n.usi == 0)
+	{
+		n.len = 0;
+		n.superiorlen = 0;
+	}
 	return (ft_putpositive(n, base));
 }

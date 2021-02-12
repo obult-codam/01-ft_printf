@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/28 19:48:52 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/11 22:18:48 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/11 23:37:09 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ int		wwcd(char **format, va_list *ap, char c)
 
 int		main(void)
 {
-	int a01, a02, a03, a04, a05, a06, a07, a08, a09, a10, a11, a12;
-	printf("%i\n", ft_printf("%.d\n", 0, &a02, &a03, &a04, &a05, &a06, &a07, &a08, &a09, &a10, &a11, &a12));
-	printf("%i %i", sizeof(size_t), sizeof(void *));
+	printf("%i\n", ft_printf("%.*s\n", -3, "null"));
+	printf("%i\n", ft_printf("%.*x\n", -3, 42));
 	return (0);
 }

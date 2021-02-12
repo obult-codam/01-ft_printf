@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/30 19:38:45 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/11 22:19:31 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/12 10:11:59 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,34 @@ int		ft_atoi(char *nbr)
 	return (n);
 }
 
-int		ft_width(char *format, va_list *ap)
+int		ft_width(char *format, va_list *ap, int *right)
 {
+	int	tmp;
 	if (*format == '-')
 		format++;
 	while (*format == '0')
 		format++;
 	if (*format == '*')
-		return (va_arg(*ap, int)); //changes
+	{
+		tmp = va_arg(*ap, int);
+		if (tmp < 0)
+		{
+			*right = 1;
+			tmp = tmp * -1;
+		}
+		return (tmp);
+	}
 	return (ft_atoi(format));
 }
 
 int		ft_precision(char *format, va_list *ap)
 {
-	while (!ft_included(*format, ".cspdiux"))
+	while (!ft_included(*format, ".cspdiuxX"))
 		format++;
 	if (*format == '.' && format[1] == '*')
-		return (va_arg(*ap, unsigned int));
+	{
+		return (va_arg(*ap, unsigned int)); //					here is where i left
+	}
 	if (*format == '.')
 		return (ft_atoi(format + 1));
 	return (-1);

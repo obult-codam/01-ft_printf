@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/09 11:56:50 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/11 17:48:50 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/12 10:12:40 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	ft_putstring(char *s);
 void	ft_putchar(int c);
 
 int		ft_atoi(char *nbr);
-int		ft_width(char *format, va_list *ap);
+//int		ft_width(char *format, va_list *ap);
+int		ft_width(char *format, va_list *ap, int *right);
 int		ft_precision(char *format, va_list *ap);
 void	ft_putwidth(int width, int c);
 
