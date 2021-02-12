@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/28 19:48:52 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/12 11:03:58 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/12 16:18:48 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,24 @@
 int		ft_printf(const char *format, ...)
 {
 	va_list		ap;
-	int			pcount;
+	int			count;
 	int			tmp;
 
-	pcount = 0;
+	count = 0;
 	va_start(ap, format);
-	while (rnw(&format, &pcount))
+	while (rnw(&format, &count))
 	{
 		tmp = bspecial((char **)&format, &ap);
-		pcount = pcount + tmp;
+		count = count + tmp;
 		format++;
 		while (!ft_included(*format, "cspdiuxX%"))
 			format++;
 		format++;
 	}
-	return (pcount);
+	return (count);
 }
 
-int		rnw(const char **format, int *pcount)
+int		rnw(const char **format, int *count)
 {
 	int		i;
 
@@ -45,9 +45,9 @@ int		rnw(const char **format, int *pcount)
 		i++;
 	if (i)
 	{
-		write (1, *format, i);
+		write(1, *format, i);
 		*format = *format + i;
-		*pcount = *pcount + i;
+		*count = *count + i;
 	}
 	return (**format);
 }
@@ -74,19 +74,12 @@ int		wwcd(char **format, va_list *ap, char c)
 	if (c == 'p')
 		return (ft_prep_ptr(ap, format));
 	if (c == 'd' || c == 'i')
-		return (ft_prepdi(ap, format)); 
+		return (ft_prepdi(ap, format));
 	if (c == 'u')
 		return (ft_uprep(ap, format, "0123456789"));
 	if (c == 'x')
 		return (ft_uprep(ap, format, "0123456789abcdef"));
 	if (c == 'X')
 		return (ft_uprep(ap, format, "0123456789ABCDEF"));
-	return (0);
-}
-
-int		main(void)
-{
-	printf("%i\n", ft_printf("%0*i\n", -7, -42));
-	//printf("%i\n", ft_printf("%.*x\n", -3, 420042));
 	return (0);
 }

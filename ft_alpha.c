@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/29 15:01:50 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/12 10:55:37 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/12 16:20:56 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int		ft_putc(va_list *ap, char **format, int mod)
 	int		c;
 	int		right;
 
-	right = 0;
 	width = ft_width(*format + 1, ap, &right);
 	if (!mod)
 		c = va_arg(*ap, int);
@@ -30,12 +29,10 @@ int		ft_putc(va_list *ap, char **format, int mod)
 	{
 		ft_putchar(c);
 		ft_putwidth(width, ' ');
+		return (width + 1);
 	}
-	else
-	{
-		ft_putwidth(width, (*format)[1]);
-		ft_putchar(c);
-	}
+	ft_putwidth(width, (*format)[1]);
+	ft_putchar(c);
 	return (width + 1);
 }
 
@@ -47,10 +44,8 @@ int		ft_puts(va_list *ap, char **format, char *null)
 	char	*s;
 	int		right;
 
-	right = 0;
 	width = ft_width(*format + 1, ap, &right);
 	precision = ft_precision(*format, ap);
-	printf("%u\n", precision);
 	s = va_arg(*ap, char *);
 	if (!s)
 		s = null;
@@ -61,11 +56,9 @@ int		ft_puts(va_list *ap, char **format, char *null)
 	{
 		write(1, s, len);
 		ft_putwidth(width - len, ' ');
+		return (ft_retour(width, len));
 	}
-	else
-	{
-		ft_putwidth(width - len, (*format)[1]);
-		write(1, s, len);
-	}
+	ft_putwidth(width - len, (*format)[1]);
+	write(1, s, len);
 	return (ft_retour(width, len));
 }

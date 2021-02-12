@@ -6,14 +6,14 @@
 #    By: obult <obult@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/04 16:49:28 by obult         #+#    #+#                  #
-#    Updated: 2021/02/11 10:53:59 by oswin         ########   odam.nl          #
+#    Updated: 2021/02/12 13:54:39 by oswin         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libftprintf.a
 
-SRCS	= ./ft_printf.c ./utils.c ./cspdiuxX%/ft_alpha.c \
-./cspdiuxX%/ft_pointer.c ./cspdiuxX%/ft_putnbr.c ./cspdiuxX%/va_utils.c
+SRCS	= ./ft_printf.c ./ft_utils.c ./ft_alpha.c \
+./ft_pointer.c ./ft_putnbr.c ./ft_va_utils.c ./ft_decimal.c
 
 OBJS	= ${SRCS:.c=.o}
 

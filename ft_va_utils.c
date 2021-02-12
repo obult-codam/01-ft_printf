@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   va_utils.c                                         :+:    :+:            */
+/*   ft_va_utils.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/30 19:38:45 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/12 11:54:39 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/12 16:17:57 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		ft_atoi(char *nbr)
 int		ft_width(char *format, va_list *ap, int *right)
 {
 	int	tmp;
+
 	if (*format == '-')
 		format++;
 	while (*format == '0')
@@ -46,6 +47,7 @@ int		ft_width(char *format, va_list *ap, int *right)
 		}
 		return (tmp);
 	}
+	*right = 0;
 	return (ft_atoi(format));
 }
 
@@ -54,9 +56,7 @@ int		ft_precision(char *format, va_list *ap)
 	while (!ft_included(*format, ".cspdiuxX"))
 		format++;
 	if (*format == '.' && format[1] == '*')
-	{
-		return ((unsigned int)va_arg(*ap, int)); //					here is where i left
-	}
+		return ((unsigned int)va_arg(*ap, int));
 	if (*format == '.')
 		return (ft_atoi(format + 1));
 	return (-1);
