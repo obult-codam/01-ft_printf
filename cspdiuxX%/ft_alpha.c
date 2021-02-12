@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/29 15:01:50 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/12 10:23:32 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/12 10:55:37 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 int		ft_putc(va_list *ap, char **format, int mod)
 {
 	int		width;
-	int	c;
+	int		c;
+	int		right;
 
-	width = ft_width(*format + 1, ap);
+	right = 0;
+	width = ft_width(*format + 1, ap, &right);
 	if (!mod)
 		c = va_arg(*ap, int);
 	else
 		c = '%';
 	if (width)
 		width--;
-	if ((*format)[1] == '-')
+	if ((*format)[1] == '-' || right)
 	{
 		ft_putchar(c);
 		ft_putwidth(width, ' ');
@@ -48,11 +50,12 @@ int		ft_puts(va_list *ap, char **format, char *null)
 	right = 0;
 	width = ft_width(*format + 1, ap, &right);
 	precision = ft_precision(*format, ap);
+	printf("%u\n", precision);
 	s = va_arg(*ap, char *);
 	if (!s)
 		s = null;
 	len = ft_strlen(s);
-	if (precision < len && precision != -1)
+	if (precision < len && precision >= 0)
 		len = precision;
 	if ((*format)[1] == '-' || right)
 	{

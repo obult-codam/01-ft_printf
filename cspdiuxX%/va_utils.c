@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/30 19:38:45 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/12 10:11:59 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/12 11:54:39 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		ft_precision(char *format, va_list *ap)
 		format++;
 	if (*format == '.' && format[1] == '*')
 	{
-		return (va_arg(*ap, unsigned int)); //					here is where i left
+		return ((unsigned int)va_arg(*ap, int)); //					here is where i left
 	}
 	if (*format == '.')
 		return (ft_atoi(format + 1));

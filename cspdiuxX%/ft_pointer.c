@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/27 21:41:30 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/11 21:00:39 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/12 10:29:28 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int		ft_prep_ptr(va_list *ap, char **format)
 	t_prep		n;
 	void		*ptr;
 
-	n.width = ft_width(*format + 1, ap);
+	n.right = 0;
+	n.width = ft_width(*format + 1, ap, &(n.right));
 	n.precision = ft_precision(*format, ap);
 	ptr = va_arg(*ap, void*);
 	n.min = 0;
 	n.zero = 32;
-	n.right = 0;
 	n.len = ft_writelen_b((size_t)ptr, 16);
 	n.superiorlen = n.len;
 	if (n.precision > n.len)
