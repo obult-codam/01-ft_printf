@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/28 19:48:52 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/12 17:22:42 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/12 22:32:08 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,3 +83,16 @@ int		wwcd(char **format, va_list *ap, char c)
 		return (ft_uprep(ap, format, "0123456789ABCDEF"));
 	return (0);
 }
+
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	printf("%i\n", ft_printf("%.5p", 5));
+// 	printf("%i\n", printf("%.5p", 5));
+
+// 	printf("%i\n", ft_printf("%5p", 5));
+// 	printf("%i\n", printf("%5p", 5));
+
+// 	printf("%i\n", ft_printf("%.p", 0));
+// 	printf("%i\n", printf("%.p", 0));
+// }

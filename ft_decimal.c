@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/12 13:41:44 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/12 16:54:38 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/12 19:24:40 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_prepdi_helper(t_prep *p)
 {
 	if (p->nbr < 0)
 	{
-		p->len = 1 + ft_writelen_b(p->nbr * -1, 10);
+		p->len = 1 + ft_writelen_b((size_t)p->nbr * -1, 10);
 		p->min = 1;
 		p->superiorlen = p->len;
 		if (p->precision + 1 > p->len)
