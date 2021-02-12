@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/12 13:41:44 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/12 16:17:13 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/12 16:54:38 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		ft_prepdi(va_list *ap, char **format)
 {
 	t_prep		n;
 
+	n.right = 0;
 	n.width = ft_width(*format + 1, ap, &(n.right));
 	n.precision = ft_precision(*format, ap);
 	n.nbr = va_arg(*ap, int);
