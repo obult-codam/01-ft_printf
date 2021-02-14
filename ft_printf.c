@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/28 19:48:52 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/12 22:32:08 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/14 13:52:59 by obult         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,19 @@ int		ft_printf(const char *format, ...)
 	while (rnw(&format, &count))
 	{
 		tmp = bspecial((char **)&format, &ap);
-		count = count + tmp;
-		format++;
-		while (!ft_included(*format, "cspdiuxX%"))
+		if (tmp >= 0)
+		{
+			count = count + tmp;
 			format++;
-		format++;
+			while (!ft_included(*format, "cspdiuxX%"))
+				format++;
+			format++;
+		}
+		else
+		{
+			format++;
+			count++;
+		}
 	}
 	return (count);
 }
@@ -61,8 +69,13 @@ int		bspecial(char **format, va_list *ap)
 		i++;
 	if (ft_included((*format)[i], "cspdiuxX"))
 		return (wwcd(format, ap, (*format)[i]));
-	else
+	else if ((*format)[i] == '%')
 		return (ft_putc(ap, format, 1));
+	else
+	{
+		ft_putchar('%');
+		return (-1);
+	}
 }
 
 int		wwcd(char **format, va_list *ap, char c)
@@ -87,12 +100,12 @@ int		wwcd(char **format, va_list *ap, char c)
 // #include <stdio.h>
 // int	main(void)
 // {
-// 	printf("%i\n", ft_printf("%.5p", 5));
-// 	printf("%i\n", printf("%.5p", 5));
+// 	// printf("%i\n", ft_printf("%.5p", 5));
+// 	// printf("%i\n", printf("%.5p", 5));
 
-// 	printf("%i\n", ft_printf("%5p", 5));
-// 	printf("%i\n", printf("%5p", 5));
+// 	// printf("%i\n", ft_printf("%5p", 5));
+// 	// printf("%i\n", printf("%5p", 5));
 
-// 	printf("%i\n", ft_printf("%.p", 0));
-// 	printf("%i\n", printf("%.p", 0));
+// 	ft_printf("%-f", 42.5);
+// 	//printf("%i\n", printf("%.p", 0));
 // }
