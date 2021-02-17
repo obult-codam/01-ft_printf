@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/25 11:36:39 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/12 17:21:58 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/17 22:45:01 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_putnbr_b(size_t input, char *base, int blen)
 
 int		ft_putpositive(t_prep info, char *base)
 {
-	if (info.precision > 0)
+	if (info.precision >= 0)
 	{
 		if (!info.right)
 			ft_putwidth(info.width - info.superiorlen, ' ');
