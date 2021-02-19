@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/28 19:48:52 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/19 10:13:52 by obult         ########   odam.nl         */
+/*   Updated: 2021/02/19 11:40:54 by oswin         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,20 +90,3 @@ int		wwcd(char **format, va_list *ap, char c)
 		return (ft_uprep(ap, format, "0123456789ABCDEF"));
 	return (0);
 }
-
-// #include <stdio.h>
-// int	main(void)
-// {
-// 	// printf("%i\n", ft_printf("%.5p", 5));
-// 	// printf("%i\n", printf("%.5p", 5));
-
-// 	// printf("%i\n", ft_printf("%5p", 5));
-// 	// printf("%i\n", printf("%5p", 5));
-
-// 	ft_printf("%*s, %*s, %*s, %*s, %*s, %*s, %*s, %*s\n", 2, "0", 2, "-a", 2, "12", 2, "0", 2, "%%", 2, "-2147483648", 2, "0x12345678", 2, "-0");
-// 	   printf("%*s, %*s, %*s, %*s, %*s, %*s, %*s, %*s\n", 2, "0", 2, "-a", 2, "12", 2, "0", 2, "%%", 2, "-2147483648", 2, "0x12345678", 2, "-0");
-	
-// 	// ft_printf("%*s, %*s\n", 2, "0", 2, "0");
-// 	//    printf("%*s, %*s\n", 2, "0", 2, "0");
-// 	//printf("%i\n", printf("%.p", 0));
-// }
