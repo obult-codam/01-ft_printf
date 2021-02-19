@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/29 15:01:50 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/12 16:20:56 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/19 10:13:41 by obult         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		ft_puts(va_list *ap, char **format, char *null)
 	char	*s;
 	int		right;
 
+	right = 0;
 	width = ft_width(*format + 1, ap, &right);
 	precision = ft_precision(*format, ap);
 	s = va_arg(*ap, char *);

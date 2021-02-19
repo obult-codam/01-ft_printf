@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/30 19:38:45 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/12 16:17:57 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/19 09:58:56 by obult         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ int		ft_width(char *format, va_list *ap, int *right)
 {
 	int	tmp;
 
-	if (*format == '-')
-		format++;
-	while (*format == '0')
+	while (ft_included(*format, "-0"))
 		format++;
 	if (*format == '*')
 	{

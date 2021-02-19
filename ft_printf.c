@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/28 19:48:52 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/14 13:52:59 by obult         ########   odam.nl         */
+/*   Updated: 2021/02/19 10:13:52 by obult         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,16 @@ int		ft_printf(const char *format, ...)
 	while (rnw(&format, &count))
 	{
 		tmp = bspecial((char **)&format, &ap);
+		format++;
 		if (tmp >= 0)
 		{
 			count = count + tmp;
-			format++;
 			while (!ft_included(*format, "cspdiuxX%"))
 				format++;
 			format++;
 		}
 		else
-		{
-			format++;
 			count++;
-		}
 	}
 	return (count);
 }
@@ -71,11 +68,8 @@ int		bspecial(char **format, va_list *ap)
 		return (wwcd(format, ap, (*format)[i]));
 	else if ((*format)[i] == '%')
 		return (ft_putc(ap, format, 1));
-	else
-	{
-		ft_putchar('%');
-		return (-1);
-	}
+	ft_putchar('%');
+	return (-1);
 }
 
 int		wwcd(char **format, va_list *ap, char c)
@@ -106,6 +100,10 @@ int		wwcd(char **format, va_list *ap, char c)
 // 	// printf("%i\n", ft_printf("%5p", 5));
 // 	// printf("%i\n", printf("%5p", 5));
 
-// 	ft_printf("%-f", 42.5);
+// 	ft_printf("%*s, %*s, %*s, %*s, %*s, %*s, %*s, %*s\n", 2, "0", 2, "-a", 2, "12", 2, "0", 2, "%%", 2, "-2147483648", 2, "0x12345678", 2, "-0");
+// 	   printf("%*s, %*s, %*s, %*s, %*s, %*s, %*s, %*s\n", 2, "0", 2, "-a", 2, "12", 2, "0", 2, "%%", 2, "-2147483648", 2, "0x12345678", 2, "-0");
+	
+// 	// ft_printf("%*s, %*s\n", 2, "0", 2, "0");
+// 	//    printf("%*s, %*s\n", 2, "0", 2, "0");
 // 	//printf("%i\n", printf("%.p", 0));
 // }

@@ -6,7 +6,7 @@
 /*   By: oswin <oswin@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/12 13:41:44 by oswin         #+#    #+#                 */
-/*   Updated: 2021/02/12 19:24:40 by oswin         ########   odam.nl         */
+/*   Updated: 2021/02/17 22:51:47 by obult         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		ft_putdi(t_prep info)
 
 int		ft_putnegative(t_prep info)
 {
-	if (info.precision > 0)
+	if (info.precision >= 0)
 	{
 		if (!info.right)
 			ft_putwidth(info.width - info.superiorlen, ' ');
@@ -80,8 +80,8 @@ int		ft_putnegative(t_prep info)
 			ft_putwidth(info.width - info.len, info.zero);
 		}
 	}
-	if ((info.zero != 48 && info.precision <= 0)
-	|| (info.right && info.precision <= 0))
+	if ((info.zero != 48 && info.precision < 0)
+	|| (info.right && info.precision < 0))
 		ft_putchar('-');
 	ft_putnbr_b((unsigned int)(-1 * info.nbr), "0123456789", 10);
 	if (info.right)
